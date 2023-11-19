@@ -4,6 +4,7 @@ import Lab5 from "./lab5.js";
 import CourseRoutes from './courses/routes.js';
 import ModuleRoutes from "./modules/routes.js";
 import cors from "cors";
+import dotenv from 'dotenv';
 
 
 
@@ -15,4 +16,4 @@ ModuleRoutes(app);
 Lab5(app);
 Hello(app);
 
-app.listen(4000);
+app.listen(process.env.PORT || 4000);

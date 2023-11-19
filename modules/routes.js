@@ -26,6 +26,7 @@ function ModuleRoutes(app) {
 
   app.put("/api/modules/:mid", (req, res) => {
     const { mid } = req.params;
+
     const moduleIndex = db.modules.findIndex(
       (m) => m._id === mid);
     db.modules[moduleIndex] = {

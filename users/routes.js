@@ -44,15 +44,24 @@ function UserRoutes(app) {
 
   const signin = async (req, res) => {
     const { username, password } = req.body;
+    console.log(`Signing in with ${JSON.stringify(req.body)}`)
     const currentUser = await dao.findUserByCredentials(username, password);
-    req.session['currentUser'] = currentUser;
-    res.json(currentUser);
+    if (currentUser) {
+      req.session['currentUser'] = currentUser;
+      console.log(`Set current user to ${JSON.stringify(req.session['currentUser'])}`)
+      res.json(currentUser);
+    }
+    else {
+      console.log(`failed to sign in with username ${username}`)
+      res.json({});
+    }
   };
   const signout = (req, res) => {
     req.session.destroy();
     res.json(200);
   };
   const account = async (req, res) => {
+    console.log(`sending currentUSer ${JSON.stringify(req.session['currentUser'])}`)
     res.json(req.session['currentUser']);
   };
   app.post("/api/users", createUser);

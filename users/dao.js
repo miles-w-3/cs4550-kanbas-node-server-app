@@ -1,5 +1,16 @@
 import model from "./model.js";
-export const createUser = (user) => model.create(user);
+export const createUser = async (user) => {
+  try {
+    // we want to remove this field for a new user being created,
+    // mongo will create it
+    delete user._id;
+    const newUser = await model.create(user);
+    return newUser
+  } catch {
+    return {};
+  }
+
+};
 export const findAllUsers = () => model.find();
 export const findUserById = (userId) => model.findById(userId);
 export const findUserByUsername = (username) =>

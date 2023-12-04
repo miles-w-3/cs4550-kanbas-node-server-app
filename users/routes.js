@@ -6,6 +6,7 @@ function UserRoutes(app) {
     res.json(user);
   };
   app.post("/api/users", createUser);
+
   const deleteUser = async (req, res) => {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);
